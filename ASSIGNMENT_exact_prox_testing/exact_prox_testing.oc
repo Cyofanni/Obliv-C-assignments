@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <obliv.oh>
+
+#include "exact_prox_testing.h"
+
+void exactProximityTesting(void* args)
+{
+  protocolIO *io = args;
+  obliv float x1, y1, x2, y2;
+  float eucl_distance = 0;
+
+  x1 = feedOblivFloat(io->coords[0], 1);
+  y1 = feedOblivFloat(io->coords[1], 1);
+
+  x2 = feedOblivFloat(io->coords[0], 2);
+  y2 = feedOblivFloat(io->coords[1], 2);
+
+  float diffx = 0;
+  float diffy = 0;
+  revealOblivFloat(&diffx, x1-x2, 0);
+  revealOblivFloat(&diffy, y1-y2, 0);
+
+  revealOblivFloat(&eucl_distance, sqrt(pow(diffx,2) + pow(diffy,2)), 0);
+
+  if(eucl_distance < THRESHOLD_DISTANCE){
+	io->res = 1;
+  }
+  else{
+	io->res = 0;
+  }
+}

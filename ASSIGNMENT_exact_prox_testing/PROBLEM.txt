@@ -1,0 +1,2 @@
+* Alice wants to know whether Bob is within a certain distance
+  from her location (e.g., 2 km)
