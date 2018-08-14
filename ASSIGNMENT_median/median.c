@@ -11,7 +11,7 @@ int main(int argc,char *argv[])
   ProtocolDesc pd;
   protocolIO io;
   u_int currentParty;
-  //needed parameters: program name, party (<1|2>), 1st cart. coord. of curr. party, 2nd cart. coord. of curr. party, TCP port number
+  //needed parameters: program name, party (<1|2>), [...], TCP port number
   if(argc < 5)
   {
     fprintf(stderr, "Usage: %s <1|2> <coordinate> <coordinate> <port>\n", argv[0]);
