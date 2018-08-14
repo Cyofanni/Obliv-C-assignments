@@ -1,0 +1,5 @@
+*Assume that Alice and Bob each have a list of n distinct
+ numerical values from a domain of size N
+
+*They want to compute the median of the union of their lists,
+ while keeping the contents of the lists secret

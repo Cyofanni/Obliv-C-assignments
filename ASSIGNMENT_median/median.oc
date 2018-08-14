@@ -1,0 +1,20 @@
+#include <stdio.h>
+#include <obliv.oh>
+
+#include "median.h"
+
+int cmpint(const void* i1, const void* i2){
+        if (*(int*)i1 < *(int*)i2){
+                return -1;
+        }
+        else if (*(int*)i1 > *(int*)i2){
+                return 1;
+        }
+}
+
+void median(void* args)
+{
+  protocolIO *io = args;
+  obliv int m_a, m_b;     //medians for the two parties
+
+}
