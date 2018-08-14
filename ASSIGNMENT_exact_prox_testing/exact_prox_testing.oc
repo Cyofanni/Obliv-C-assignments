@@ -7,7 +7,7 @@ void exactProximityTesting(void* args)
 {
   protocolIO *io = args;
   obliv float x1, y1, x2, y2;
-  float eucl_distance = 0;
+  float eucl_distance_squared = 0;
 
   x1 = feedOblivFloat(io->coords[0], 1);
   y1 = feedOblivFloat(io->coords[1], 1);
@@ -20,9 +20,9 @@ void exactProximityTesting(void* args)
   revealOblivFloat(&diffx, x1-x2, 0);
   revealOblivFloat(&diffy, y1-y2, 0);
 
-  revealOblivFloat(&eucl_distance, sqrt(pow(diffx,2) + pow(diffy,2)), 0);
+  revealOblivFloat(&eucl_distance_squared, powf(diffx,2) + powf(diffy,2), 0);
 
-  if(eucl_distance < THRESHOLD_DISTANCE){
+  if(eucl_distance_squared < powf(THRESHOLD_DISTANCE, 2)){
 	io->res = 1;
   }
   else{
