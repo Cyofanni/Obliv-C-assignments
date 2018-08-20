@@ -16,5 +16,55 @@ void median(void* args)
 {
   protocolIO *io = args;
   obliv int m_a, m_b;     //medians for the two parties
+  bool lt, eq, gt;        //flags to check whether m_a < m_b
+  int curr_length = io->length;    //used in the loop
 
+  obliv int curr_list_1[io->length];   //work on two obliv arrays, one for each party
+  obliv int curr_list_2[io->length];
+
+  qsort(&(io->list[0]), io->length, sizeof(int), cmpint);
+  int i;
+
+  for (i = 0; i < io->length; i++){
+	curr_list_1[i] = feedOblivInt(io->list[i], 1);
+	curr_list_2[i] = feedOblivInt(io->list[i], 2);
+  }
+
+  int curr_start_1 = 0;    //current start of list 1
+  int curr_start_2 = 0;    //current start of list 2
+
+  while (curr_length >= 1){
+    m_a = curr_list_1[curr_start_1 + curr_length/2 - 1];   //the median is in the middle of the list
+    m_b = curr_list_2[curr_start_2 + curr_length/2 - 1];
+
+    /*int ma_reveal;
+    int mb_reveal;
+    revealOblivInt(&ma_reveal, m_a, 0);
+    revealOblivInt(&mb_reveal, m_b, 0);
+
+    printf("%d %d\n", ma_reveal, mb_reveal);*/
+
+    revealOblivBool(&lt, m_a < m_b, 0);    //put the evaluation of "m_a < m_b" into the boolean "lt", and reveal it
+    revealOblivBool(&eq, m_a == m_b, 0);
+    revealOblivBool(&gt, m_a > m_b, 0);
+
+    curr_length = curr_length / 2;
+
+    if (lt){    //if m_a < m_b, Alice removes all items ≤ m_a and Bob removes all items > m_b
+	//in order to remove the lower half of the array, its start index is shifted
+	curr_start_1 = curr_start_1 + curr_length;
+    }
+    else if (eq || gt){
+	curr_start_2 = curr_start_2 + curr_length;
+    }
+  }
+
+  if (lt){
+	revealOblivInt(&(io->res), curr_list_1[curr_start_1], 0);
+  }
+  else if (eq || gt){
+  	revealOblivInt(&(io->res), curr_list_2[curr_start_2], 0);
+  }
 }
+
+
