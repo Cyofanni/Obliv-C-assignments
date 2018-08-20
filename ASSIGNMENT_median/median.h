@@ -3,8 +3,8 @@
 
 typedef struct protocolIO {
     int length;
-    int list[8];     //list of n (power of 2) distinct numerical values from a domain of size N
-    int res;	     //median of the union
+    int *list;     //list of n (power of 2) distinct numerical values from a domain of size N 
+    int res;	     //median of the union         
 } protocolIO;
 
 void median(void* args);

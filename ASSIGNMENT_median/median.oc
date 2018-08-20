@@ -34,15 +34,21 @@ void median(void* args)
   int curr_start_2 = 0;    //current start of list 2
 
   while (curr_length >= 1){
-    m_a = curr_list_1[curr_start_1 + curr_length/2 - 1];   //the median is in the middle of the list
-    m_b = curr_list_2[curr_start_2 + curr_length/2 - 1];
+    if (curr_length > 1){
+    	m_a = curr_list_1[curr_start_1 + curr_length/2 - 1];   //the median is in the middle of the list
+    	m_b = curr_list_2[curr_start_2 + curr_length/2 - 1];
+    }
+    else{
+	m_a = curr_list_1[curr_start_1];   //the median is in the middle of the list
+    	m_b = curr_list_2[curr_start_2];
+    }
 
-    /*int ma_reveal;
+    int ma_reveal;
     int mb_reveal;
     revealOblivInt(&ma_reveal, m_a, 0);
     revealOblivInt(&mb_reveal, m_b, 0);
 
-    printf("%d %d\n", ma_reveal, mb_reveal);*/
+    printf("%d %d\n", ma_reveal, mb_reveal);
 
     revealOblivBool(&lt, m_a < m_b, 0);    //put the evaluation of "m_a < m_b" into the boolean "lt", and reveal it
     revealOblivBool(&eq, m_a == m_b, 0);

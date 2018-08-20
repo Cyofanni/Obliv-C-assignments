@@ -11,17 +11,13 @@ int main(int argc,char *argv[])
   ProtocolDesc pd;
   protocolIO io;
   u_int currentParty;
-  //needed parameters: program name, party (<1|2>), 1st cart. coord. of curr. party, 2nd cart. coord. of curr. party, TCP port number
-  if(argc < 5)
-  {
-    fprintf(stderr, "Usage: %s <1|2> <coordinate> <coordinate> <port>\n", argv[0]);
-    return 1;
-  }
+  //needed parameters: program name, party (<1|2>), size of list, [list], TCP port number
 
   //read data from command line
   sscanf(argv[1], "%u", &currentParty);
   sscanf(argv[2], "%u", &(io.length));
 
+  io.list = malloc(sizeof(int)*io.length);
 
   int i;
   for (i = 0; i < io.length; i++){
