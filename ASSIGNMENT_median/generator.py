@@ -12,6 +12,3 @@ known_median = union[int(math.pow(2, exp-1)) - 1]
 print party_1
 print party_2
 print known_median
-
-
-
