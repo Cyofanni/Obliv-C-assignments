@@ -1,0 +1,23 @@
+		***Exact Proximity Testing***
+
+** Problem description
+Alice wants to know whether Bob is within a certain distance from her location (e.g., 2km), without publishing her own coordinates (same for Bob).
+
+** Notes on the code
+The code for this task has been divided into three source files: 
+      - exact_prox_testing.c: it contains the usual sanity checks on the command line inputs, the parameter setting, 
+	and finally some calls to Obliv-C library's functions, such as "setCurrentParty" and "execYaoProtocol" (used to call
+	the function implementing the oblivious computation);
+      - exact_prox_testing.h: here the struct "protocolIO" is defined. It contains two records, an array representing the latitude and the longitude
+	of the current party, and an integer which will store the final result (0 or 1);
+      - exact_prox_testing.oc: here the actual oblivious computation is performed. The coordinates are stored into four "obliv floats".
+	Then the square of the euclidean distance is computed. In the end, the outcome is published and shared among parties in protocolIO's
+	"res" variable.
+
+** How to compile and run the assignment
+In order to compile, run and test the code you should first clone this repository: https://github.com/samee/obliv-c.
+Follow the instructions in the README to compile and install it.
+Finally, put this folder (ASSIGNMENT_exact_prox_testing) under obliv-c/test/oblivc and run "make" inside it.
+Some tests can be run thanks to the script named "tests.sh".
+
+
