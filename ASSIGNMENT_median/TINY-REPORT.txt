@@ -26,5 +26,5 @@ The code for this task has been divided into three source files:
 ** How to compile and run the assignment
 In order to compile, run and test the code you should first clone this repository: https://github.com/samee/obliv-c.
 Follow the instructions in the README to compile and install it.
-Finally, put this folder (ASSIGNMENT_exact_prox_testing) under obliv-c/test/oblivc and run "make" inside it.
+Finally, put this folder (ASSIGNMENT_median) under obliv-c/test/oblivc and run "make" inside it.
 Some tests can be run thanks to the script named "tests.sh".
