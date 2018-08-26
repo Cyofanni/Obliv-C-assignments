@@ -1,0 +1,30 @@
+		***Oblivious median computation***
+
+** Problem description
+  -Assume that Alice and Bob each have a list of n distinct numerical values from a domain of size N.
+  -They want to compute the median of the union of their lists, while keeping the contents of the lists secret.
+
+** Notes on the code
+The code for this task has been divided into three source files: 
+      - median.c: it contains the usual sanity checks on the command line inputs, the parameter setting, memory allocation (for the array) 
+	and finally some calls to Obliv-C library's functions, such as "setCurrentParty" and "execYaoProtocol" (used to call
+	the function implementing the oblivious computation);
+      - median.h: here the struct "protocolIO" is defined. It contains three records, an array containing the list of distict numbers
+	provided by the current party, an integer representing the list's length (which must be a power of 2), 
+	and another integer representing the computed median of the union.
+	The command line should receive the following data: <current party> <length of list> <list> <port>;
+      - median.oc: here the actual oblivious computation is performed. The algorithm/protocol we implemented here can be summed up as follows:
+			1) Alice and Bob compute the median of their own lists, denoted as m_a and m_b (lines 38/39 in the code);
+			2) the parties run the secure comparison protocol (i.e. Yao's protocol) to determine whether m_a < m_b:
+		               -- if true, Alice removes all items ≤ m_a and Bob removes all
+				  items > m_b (line 59)
+			       -- otherwise, each party removes the other half of his/her list (line 63)
+			3) repeat these steps log(2n) times, until we are left with a single item (the median).
+	This protocol's time complexity is known to be O(log n * log n).
+	Note that in our code none of the lists' items has been actually removed, since we handled every array halving through index shifting (lines 61-65).
+
+** How to compile and run the assignment
+In order to compile, run and test the code you should first clone this repository: https://github.com/samee/obliv-c.
+Follow the instructions in the README to compile and install it.
+Finally, put this folder (ASSIGNMENT_exact_prox_testing) under obliv-c/test/oblivc and run "make" inside it.
+Some tests can be run thanks to the script named "tests.sh".
