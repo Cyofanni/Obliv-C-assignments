@@ -9,7 +9,7 @@ The code for this task has been divided into three source files:
       - median.c: it contains the usual sanity checks on the command line inputs, the parameter setting, memory allocation (for the array)
 	and finally some calls to Obliv-C library's functions, such as "setCurrentParty" and "execYaoProtocol" (used to call
 	the function implementing the oblivious computation);
-      - median.h: here the struct "protocolIO" is defined. It contains three records, an array containing the list of distict numbers
+      - median.h: here the struct "protocolIO" is defined. It contains three records, an array containing the list of distinct numbers
 	provided by the current party, an integer representing the list's length (which must be a power of 2),
 	and another integer representing the computed median of the union.
 	The command line should receive the following data: <current party> <length of list> <list> <port>;
